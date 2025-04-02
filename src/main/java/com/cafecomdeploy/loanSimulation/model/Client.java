@@ -2,7 +2,10 @@ package com.cafecomdeploy.loanSimulation.model;
 
 import com.cafecomdeploy.loanSimulation.enums.RiskScore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 
@@ -13,8 +16,11 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String name;
+    @CPF
     private String cpf;
+    @Email
     private String email;
     private String phone;
     private LocalDate dateOfBirth;

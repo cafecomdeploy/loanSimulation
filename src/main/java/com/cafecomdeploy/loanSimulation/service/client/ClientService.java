@@ -1,4 +1,4 @@
-package com.cafecomdeploy.loanSimulation.service;
+package com.cafecomdeploy.loanSimulation.service.client;
 
 import com.cafecomdeploy.loanSimulation.model.Client;
 import com.cafecomdeploy.loanSimulation.repository.ClientRepository;
@@ -22,5 +22,10 @@ public class ClientService implements IClientService{
         } catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Customer already exists.", e);
         }
+    }
+
+    @Override
+    public Client findBycpf(String cpf) {
+        return clientRepository.findByCpf(cpf);
     }
 }
