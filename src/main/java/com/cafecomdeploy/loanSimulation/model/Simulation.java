@@ -1,23 +1,29 @@
 package com.cafecomdeploy.loanSimulation.model;
 
 import com.cafecomdeploy.loanSimulation.enums.LoanType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @EntityListeners(AuditingEntityListener.class)
 public class Simulation {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
+    private String cpf;
     private Double requestedAmount;
     private Integer termInMonths;
     private LoanType loanType;
@@ -30,8 +36,9 @@ public class Simulation {
     @Column(nullable = false, updatable = false)
     private LocalDateTime creationDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    @JsonBackReference
     private Client client;
 
     @OneToOne(mappedBy = "simulation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
