@@ -6,10 +6,9 @@ import com.cafecomdeploy.loanSimulation.service.simulation.ISimulationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/simulation")
@@ -19,8 +18,15 @@ public class SimulationController {
     private ISimulationService simulationService;
 
     @PostMapping
-    public ResponseEntity<Simulation> createClient(@RequestBody SimulationDTO simulationDTO) {
+    public ResponseEntity<Simulation> createSimulation(@RequestBody SimulationDTO simulationDTO) {
         Simulation createdSimulation = simulationService.create(simulationDTO);
         return new ResponseEntity<>(createdSimulation, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    @ResponseBody
+    public ResponseEntity<Collection<Simulation>> getSimulation(@RequestParam(required = false) String cpf) {
+        Collection<Simulation> simulations = simulationService.getSimuation(cpf);
+        return new ResponseEntity<>(simulations, HttpStatus.OK);
     }
 }

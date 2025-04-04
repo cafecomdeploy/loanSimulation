@@ -9,6 +9,9 @@ import com.cafecomdeploy.loanSimulation.service.client.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.List;
+
 @Service
 public class SimulationService implements ISimulationService{
 
@@ -24,6 +27,7 @@ public class SimulationService implements ISimulationService{
         Integer months = simulationDTO.getTermInMonths();
 
         Simulation simulation = Simulation.builder()
+                .cpf(simulationDTO.getCpf())
                 .requestedAmount(simulationDTO.getRequestedAmount())
                 .termInMonths(months)
                 .loanType(simulationDTO.getLoanType())
@@ -34,6 +38,11 @@ public class SimulationService implements ISimulationService{
                 .build();
 
         return simulationRepository.save(simulation);
+    }
+
+    @Override
+    public Collection<Simulation> getSimuation(String cpf) {
+        return simulationRepository.findByCpf(cpf);
     }
 
     private Double installmentValue(Double requestedAmount, Double interestRate, Integer termInMonths){
