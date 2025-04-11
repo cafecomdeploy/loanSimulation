@@ -1,7 +1,8 @@
-package com.cafecomdeploy.loanSimulation.service.client;
+package com.cafecomdeploy.loanSimulation.service;
 
 import com.cafecomdeploy.loanSimulation.model.Client;
 import com.cafecomdeploy.loanSimulation.repository.ClientRepository;
+import com.cafecomdeploy.loanSimulation.service.client.ClientService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
