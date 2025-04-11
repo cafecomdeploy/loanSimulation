@@ -98,23 +98,6 @@ cd loanSimulation
 
 A API estará disponível em: [http://localhost:8009](http://localhost:8009)
 
-Acesse a documentação Swagger em: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-
----
-
-## ✅ Testes
-
-Execute os testes automatizados com:
-
-```bash
-./mvnw test
-```
-
-Os testes cobrem:
-
-- Regras de cálculo dos juros
-- Validações de entrada
-- Regras de negócio
 
 ---
 
